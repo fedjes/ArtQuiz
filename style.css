@@ -43,8 +43,51 @@ header {
 
 
 
+.set {
+    background-color: tomato;
+    width: 600px;
+    height: 170px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
 
+.wrapper{
+    background-color:#f00;
+    position:relative;
+    width:100px;
+    height:4px;
+    user-select:none; 
+    display:flex;
+    align-items:center;
+  }
+  
+  .range{
+     background-color:#999;
+    user-select:none; 
+    padding: 7px 28px;
+    width: 100px;
+  }
+  
+  .dragable{
+    width:8px;
+    height:15px;
+    user-select:none; transform:translate(-50%);
+    position:relative;
+    background-color:#000;
+  }
+  
+  .cover{
+    position:fixed;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100vh;
+    background-color:#0000;
+    z-index:1000;
+  }
 
+ 
 
 
 
