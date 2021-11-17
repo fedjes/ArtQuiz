@@ -24,13 +24,13 @@
 
 import header from './Header.js';
 import footer from './Footer.js';
-import btn from './mainContent.js';
+//import btn from './mainContent.js';
 
  let headerMain = document.createElement('div');
  
  let footerMain = document.createElement('div');
 
- let mainContent = document.createElement('div');
+ //let mainContent = document.createElement('div');
  
  document.body.prepend(footerMain)
  footerMain.innerHTML = footer;
