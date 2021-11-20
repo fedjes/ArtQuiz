@@ -24,7 +24,9 @@
 
 import header from './Header.js';
 import footer from './Footer.js';
+import home from './tamplates/pages/home.js';
 //import btn from './mainContent.js';
+console.log(home);
 
  let headerMain = document.createElement('div');
  
