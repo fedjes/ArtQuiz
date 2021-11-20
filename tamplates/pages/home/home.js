@@ -1,9 +1,15 @@
-import Category from '../category.js';
+const btnArtists = document.getElementById('CategoryArtists');
+const btnPictures = document.getElementById('CategoryPictures');
 
 
-const home =
-    `<div class="home">`+
-        Category
-    +`</div>`
-    
-export default home;
+
+btnArtists.addEventListener("click", ()=>{
+    console.log('btnArtists');
+    const home = document.getElementById("home");
+    home.className = 'blockHome';
+});
+
+btnPictures.addEventListener("click", ()=>{
+    console.log('btnPictures');
+    home.className = 'blockHome';
+});
