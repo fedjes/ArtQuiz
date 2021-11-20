@@ -21,7 +21,7 @@ const img = images;
 
 
 
-
+import randomIndex from './tamplates/randomIndex.js';
 import header from './Header.js';
 import footer from './Footer.js';
 //import btn from './mainContent.js';
@@ -81,18 +81,4 @@ function picturesFill(start, end) {
         array.push(question);
     }
     return array;
-}
-
-function randomIndex(indexAnswer) {
-    let check = true;
-    let res;
-    while (check) {
-        res = Math.floor(Math.random() * img.length);
-        if (res != indexAnswer) {
-            check = false;
-        } else {
-            continue;
-        }
-    }
-    return res;
 }
