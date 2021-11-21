@@ -6,6 +6,13 @@ function createRow(divList){
     )
 }
 
+//  let div1 = document.createElement('div')
+//  div1.className = 'col';
+//  document.body.prepend(div1);
+//  div1.addEventListener("click", ()=>{
+//      console.log('work');
+//  });
+
 function createCategory(thema, count, img_src) {
     return (
     `<div class="col" style="display: grid;">
@@ -22,7 +29,7 @@ function createCategory(thema, count, img_src) {
     )
 }
 
-function createList(array){
+function createListCategories(array){
     let result = ``;
     let row = ``;
      for(let i = 0; i < array.length; i++){
@@ -38,4 +45,5 @@ function createList(array){
     return result;
 }
 
-export default createList;
+export default createListCategories;
+

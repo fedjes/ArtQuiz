@@ -36,3 +36,11 @@
         font-size:28px;
     }
 }
+
+.blockCategories {
+    display: block;
+}
+
+.noneCategories {
+    display: none;
+}
