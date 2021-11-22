@@ -1,15 +1,12 @@
 import images from '../data/images.js';
 import { createQuestionArtist } from '../templates/question-artists.js';
-import Home from './home.js';
 import createHomePage from './home.js';
 import createCategoriesPage from './categories.js';
 import createAnswerPage from './answer.js';
+import Index from '../index.js';
 
-export function createArtistsQuestion(index, result, category) {
-    // console.log(index);  
-    console.log(result[index].imgNum);
-    // console.log("category: " + category);
-    let art = [result[index].artist, result[index].artist_err1, result[index].artist_err2, result[index].artist_err3];
+export function createArtistsQuestion(category, theme, result) {
+    let art = [result.artist, result.artist_err1, result.artist_err2, result.artist_err3];
     let ans = ["", "", "", ""];
     for (let i = 0; i < art.length; i++) {
         let check = true;
@@ -22,30 +19,24 @@ export function createArtistsQuestion(index, result, category) {
         }
     }
     let home = document.getElementById("main");
-    home.innerHTML = createQuestionArtist(images[result[index].imgNum].name, "./../img/" + result[index].imgNum + ".jpg", ans[0], ans[1], ans[2], ans[3]);
+    home.innerHTML = createQuestionArtist(images[result.imgNum].name, "./../img/" + result.imgNum + ".jpg", ans[0], ans[1], ans[2], ans[3]);
 
     let btnHome = document.getElementById("button-home"); // возврат на главную страницу
     btnHome.addEventListener("click", function () {
+        Index.indexQuestion.setIndex(0);
         createHomePage();
     });
 
     let btnCategory = document.getElementById("button-category"); // возврат на  страницу категорий
     btnCategory.addEventListener("click", function () {
+        Index.indexQuestion.setIndex(0);
         createCategoriesPage(category);
     });
 
     let btnQuestionArtistAnswer = document.getElementsByClassName("question-artist-answer");
-
-    
-    // btnQuestionArtistAnswer.forEach(element=>{
-    //     element.addEventLustener("click", ()=> {  //Listener
-    //         createAnswerPage(btnQuestionArtistAnswer[i].id, result[index], category, result);
-    //     });
-    // });
-
     for (let i = 0; i < btnQuestionArtistAnswer.length; i++) {
         btnQuestionArtistAnswer[i].addEventListener("click", function () {
-            createAnswerPage(btnQuestionArtistAnswer[i].id, result[index], category, result);
+            createAnswerPage(btnQuestionArtistAnswer[i].id, category, theme, result);
         });
     }
 }

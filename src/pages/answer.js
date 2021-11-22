@@ -1,51 +1,72 @@
 import images from '../data/images.js';
 import Index from '../index.js';
-import {createAnswer} from '../templates/answer.js';
-import {createArtistsQuestion} from './question-artists.js';
-import {createPicturesQuestion} from './question-pictures.js';
-import {createFinishPage} from './finish.js';
+import { createAnswer } from '../templates/answer.js';
+import { createArtistsQuestion } from './question-artists.js';
+import { createPicturesQuestion } from './question-pictures.js';
+import { createFinishPage } from './finish.js';
+import countAnswer from '../services/countAnswer.js';
 
-function createAnswerPage(check, src, name, author, year, category, questions) { 
-    // console.log("src: " + src);   
+function createAnswerPage(check, src, name, author, year, category, theme, question) {
     let home = document.getElementById("main");
     home.innerHTML = createAnswer(check, "../../img/" + src + ".jpg", name, author, year);
 
     let btnNext = document.getElementById("next-btn-question");
-    // console.log(Index.indexQuestion.getIndex());
     let index = Index.indexQuestion.getIndex();
 
     btnNext.addEventListener("click", function () {
         if (index < 9) {
             index = index + 1;
             Index.indexQuestion.setIndex(index);
-            // console.log(index);
-            if (category == "Artists")
-                createArtistsQuestion(index, questions, category); 
-            else if (category == "Pictures") {}
-                createPicturesQuestion(index, questions, category);
+            if (category == "Artists") {
+                createArtistsQuestion(category, theme, Index.QuestionsArtists.getQuestions()[question.id + 1]);
+            } else if (category == "Pictures") {
+                let questions = Index.QuestionsPictures.getQuestions();
+                for(let i = 0; i < questions.length; i++)
+                    if(questions[i].id == question.id) createPicturesQuestion(category, theme, Index.QuestionsPictures.getQuestions()[i + 1]);
+            }
         } else {
-            // console.log("Fertig");
-            let c = 0;
-            for (let o = 0; o < questions.length; o++)
-                if (questions[o].answer) c++;
-            createFinishPage(category, c);
+            if(category == "Artists"){
+                let categories = Index.CategoryArtists.getCategory();
+                let questions = Index.QuestionsArtists.getQuestions();
+                countAnswer(questions, categories).then(res => {
+                    for (let i = 0; i < res.length; i++) 
+                        if (res[i].name == theme) createFinishPage(category, res[i].count);    
+                });
+            } else if(category == "Pictures"){
+                let categories = Index.CategoryPictures.getCategory();
+                let questions = Index.QuestionsPictures.getQuestions();
+                countAnswer(questions, categories).then(res => {
+                    for (let i = 0; i < res.length; i++) 
+                        if (res[i].name == theme) createFinishPage(category, res[i].count);
+                });
+            }
+            
         }
     });
 }
 
-export default function createAnswerArtistsPage(selectAnswer, answer, category, questions) {  //отдельная функция создание страницы с ответом
-    // console.log(selectAnswer);
-    // console.log(answer);
-    // console.log(Index.QuestionsArtists);
+export default function createAnswerAPPage(selectAnswer, category, theme, question) {  //отдельная функция создание страницы с ответом
     let check = null;
-    if(selectAnswer == answer.artist){
-        Index.QuestionsArtists.setAnswer(answer.id, true);
-        check = true;
-    } else{
-        Index.QuestionsArtists.setAnswer(answer.id, false);
-        check = false;
+    let imag;
+    if (category == "Artists") {
+        imag = question.imgNum;
+        if (selectAnswer == question.artist) {
+            Index.QuestionsArtists.setAnswer(question.id, true);
+            check = true;
+        } else {
+            Index.QuestionsArtists.setAnswer(question.id, false);
+            check = false;
+        }
+    } else if(category == "Pictures") {
+        let answer = selectAnswer.split("/")[3].split(".")[0];
+        imag = answer;
+        if (answer == question.img) {
+            Index.QuestionsPictures.setAnswer(question.id, true);
+            check = true;
+        } else {
+            Index.QuestionsPictures.setAnswer(question.id, false);
+            check = false;
+        }
     }
-    // console.log(images[answer.imgNum]);
-    createAnswerPage(check, answer.imgNum, images[answer.imgNum].name, images[answer.imgNum].author, images[answer.imgNum].year, category, questions);
-
+    createAnswerPage(check, imag, images[imag].name, images[imag].author, images[imag].year, category, theme, question);
 }

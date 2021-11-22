@@ -4,7 +4,7 @@ import createCategoriesPage from './categories.js';
 function createHomePage() {
     let home = document.getElementById("main");
     home.innerHTML = createHome();
-    //Event Click
+    
     const btnArtists = document.getElementById('CategoryArtists'); /// проверка на десять вопросов , навешивание клика для артистов
     btnArtists.addEventListener("click", () => {
         createCategoriesPage("Artists");

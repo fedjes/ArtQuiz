@@ -29,6 +29,98 @@
     min-width:250px
 }
 
+#btn-logo-settings {
+    margin-left: 47%;
+}
+
+#next-btn-question {
+    text-align: center;
+    border: 1px solid red;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: tomato;
+    width: 75px;
+    margin-left: 48%;
+}
+
+#answer {
+    display: inline-block;
+    text-align: center;
+   
+}
+
+.row {
+    padding: 10px;
+    margin: auto;
+}
+
+.card-name {
+    text-decoration: underline;
+}
+
+.col button {
+    list-style: none;
+    border-radius: 25px;
+    color: blue;
+    cursor: pointer;
+    transition: 0.8s;
+}
+
+.col button:hover {
+color: brown;
+}
+
+.img-question img{
+    margin-left: 20%;
+}
+
+#main {
+    display: grid;
+}
+
+.row-cols-2 {
+    padding-left: 130px;
+    
+}
+
+.question-artist-answer {
+    text-decoration: underline;
+    color: rgb(189, 39, 89);
+}
+
+.col  {
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+#congtatulations{
+    text-align: center;
+    font-size: 30px;
+}
+#score{
+    font-size: 25px;
+    text-align: center;
+}
+
+#btn-div {
+
+    display: flex;
+    justify-content: space-around;
+}
+
+#home-btn-finish ,
+#next-btn-finish {
+    background-color: tomato;
+   cursor: pointer;
+   text-align: center;
+   border-radius: 25px;
+   width: 75px;
+}
+
+#finish {
+    background-color: deepskyblue;
+}
+
 @media(max-width:768px){
     #categories .button_home{
         width:100%;
